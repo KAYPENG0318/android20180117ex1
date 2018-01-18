@@ -6,22 +6,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.wanna.android20180117ex1.data.DBType;
 import com.wanna.android20180117ex1.data.Student;
+import com.wanna.android20180117ex1.data.StudentDAO;
+import com.wanna.android20180117ex1.data.StudentDAOFactory;
+import com.wanna.android20180117ex1.data.StudentFileDAO;
 import com.wanna.android20180117ex1.data.StudentScoreDAO;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    final public static StudentScoreDAO dao = new StudentScoreDAO();
+    public static StudentDAO dao ;
+    DBType dbType;
     ListView lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbType = DBType.FILE;// 1:記憶體 2:檔案
+        dao = StudentDAOFactory.getDAOInstance(this,dbType);
+
     }
 
     @Override

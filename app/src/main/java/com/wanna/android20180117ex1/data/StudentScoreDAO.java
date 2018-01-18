@@ -6,13 +6,14 @@ import java.util.ArrayList;
  * Created by Student on 2018/1/17.
  */
 
-public class StudentScoreDAO {
+public class StudentScoreDAO implements StudentDAO{
     public ArrayList<Student> mylist;
     public StudentScoreDAO(){
         mylist = new ArrayList<>();
     }
-    public void add(Student s){
+    public boolean add(Student s){
         mylist.add(s);
+        return true;
     }
     public ArrayList<Student> getList(){
         return mylist;
