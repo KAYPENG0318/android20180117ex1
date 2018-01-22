@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbType = DBType.FILE;// 1:記憶體 2:檔案
+        dbType = DBType.DB;// 1:記憶體 2:檔案
         dao = StudentDAOFactory.getDAOInstance(this,dbType);
 
     }
