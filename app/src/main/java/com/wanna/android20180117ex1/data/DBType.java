@@ -5,5 +5,5 @@ package com.wanna.android20180117ex1.data;
  */
 
 public enum DBType {
-    MEMORY,FILE,DB
+    MEMORY,FILE,DB,CLOUD
 }

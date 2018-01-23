@@ -24,26 +24,18 @@ public class MainActivity extends AppCompatActivity {
     public static StudentDAO dao ;
     DBType dbType;
     ListView lv;
+    ArrayList<String> studentNames;
+    ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbType = DBType.DB;// 1:記憶體 2:檔案
+        dbType = DBType.CLOUD;// 1:記憶體 2:檔案
         dao = StudentDAOFactory.getDAOInstance(this,dbType);
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        lv = (ListView)findViewById(R.id.listView);
-        ArrayList<String> studentNames = new ArrayList<>();
-        for(Student s:dao.getList())
-        {
-            studentNames.add(s.name);
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+        studentNames = new ArrayList<>();
+        adapter = new ArrayAdapter<String>(MainActivity.this,
                 android.R.layout.simple_list_item_1,studentNames);
+        lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -54,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshData();
+    }
+    public void refreshData()
+    {
+        studentNames.clear();
+        for(Student s:dao.getList())
+        {
+            studentNames.add(s.name);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
